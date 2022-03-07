@@ -6,10 +6,10 @@ const App = () => {
   useEffect(() => {
     fetch("https://hn.algolia.com/api/v1/search?query=react")
       .then((res) => res.json())
-      .then((data) => setNews(data.hits))
+      .then((data) => {console.log(data); setNews(data.hits)})
       .catch((err) => console.log(err));
   }, []);
-
+console.log(news);
   return (
     <div className="App">
       <h1>Hacker news</h1>
