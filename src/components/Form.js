@@ -8,16 +8,17 @@ const Form = ({ setQuery }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    if (!story) return alert("Serach cannot be empty");
-   
+    if (!story) return alert("Search cannot be empty");
     setQuery(story);
     setStory("");
+  
   };
 
   return (
     <form onSubmit={handleSubmit} method="POST">
       <label>
         <input
+        className="search-bar"
           placeholder="Search..."
           type="text"
           value={story}
@@ -26,7 +27,7 @@ const Form = ({ setQuery }) => {
         />
       </label>
 
-      <button type="submit">Search</button>
+      <button className="submit" type="submit">Search</button>
     </form>
   );
 };
