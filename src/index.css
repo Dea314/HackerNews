@@ -28,14 +28,14 @@ code {
 }
 .search-bar {
   margin: 5px;
-  width: 40%;
-  padding: 5px;
+  width: 20%;
+  padding: 8px;
   border: 2px solid grey;
 }
 .submit {
   margin: 5px;
-  width: 10%;
-  padding: 5px;
+  width: 5%;
+  padding: 8px;
   background-color: aliceblue;
   border: 2px solid grey;
 }
