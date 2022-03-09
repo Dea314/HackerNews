@@ -8,8 +8,8 @@ for(let i = 1; i < Math.ceil(news.length/5)+1; i++){
     return (
         <div className="pagenum">
         <center>
-        {pageNumbers.map(page => 
-        <div className="pagebutton" onClick ={ () => pageHandler(page)}>{ page }</div>)}
+        {pageNumbers.map((page,index) => 
+        <div className="pagebutton" key={index} onClick ={ () => pageHandler(page)}>{ page }</div>)}
         </center>
          </div>
     );

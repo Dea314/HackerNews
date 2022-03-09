@@ -10,8 +10,8 @@ import axios from "axios";
 const App = () => {
   const [error, setError] = useState(null);
   const [news, setNews] = useState([]);
-  const [resultvalue, setResultvalue] = useState([]);
-  const [loading, setLoading] = useState(false);
+  //const [resultvalue, setResultvalue] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [perpage, setPerpage] = useState([]);
   const [query, setQuery] = useState("react");
 
@@ -23,14 +23,14 @@ const App = () => {
 
   useEffect(() => {
     const basicAPI = `https://hn.algolia.com/api/v1/search?query=${query}`; 
-    setLoading(true);
+    
     axios
       .get(basicAPI)
       .then((res) => {
         setError("");
         setLoading(false);
         setNews(res.data.hits);
-        setResultvalue(res.data.hits.length);
+        // setResultvalue(res.data.hits.length);
         setPerpage(res.data.hits.slice(0,5));
        
       })
@@ -40,6 +40,9 @@ const App = () => {
         setLoading(false);
       });
   }, [query]);
+
+  console.log("news", news);
+  console.log(crypto.randomUUID());
   
 const pageHandler = (pageNumber) => {
   setPerpage(news.slice((pageNumber*5)-5,pageNumber*5));
@@ -54,8 +57,8 @@ const pageHandler = (pageNumber) => {
           <div>
           <ul className="list">
             {perpage.map((story) => (
-              <div>
-              <li className = "list-items" key={story.objectID}>
+              <div key={story.objectID}>
+              <li className = "list-items">
                 {story.title}
                 <br /><br/>
                 <span>Author: {story.author}</span>
@@ -70,10 +73,10 @@ const pageHandler = (pageNumber) => {
          
           )}
 
-          {resultvalue === 0 &&
-          <h2>No search results found</h2>}
+          {query && !news.length && !loading && (
+          <h2>No search results found</h2>)}
          
-          { error !== "" &&
+          { error !== "" && !loading &&
           <h2> Posts are not loading, please try again! </h2>
           }
               
