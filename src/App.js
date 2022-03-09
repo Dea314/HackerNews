@@ -10,6 +10,7 @@ import axios from "axios";
 const App = () => {
   const [error, setError] = useState(null);
   const [news, setNews] = useState([]);
+  const [resultvalue, setResultvalue] = useState([]);
   const [loading, setLoading] = useState(false);
   const [perpage, setPerpage] = useState([]);
   const [query, setQuery] = useState("react");
@@ -21,7 +22,7 @@ const App = () => {
 `;
 
   useEffect(() => {
-    const basicAPI = `https://hn.algolia.com/api/v1/search?query=${query}`;
+    const basicAPI = `https://hn.algolia.com/api/v1/search?query=${query}`; 
     setLoading(true);
     axios
       .get(basicAPI)
@@ -29,6 +30,9 @@ const App = () => {
         setError("");
         setLoading(false);
         setNews(res.data.hits);
+        setResultvalue(res.data.hits.length);
+        setPerpage(res.data.hits.slice(0,5));
+       
       })
       .catch((error) => {
         console.error(error);
@@ -36,34 +40,45 @@ const App = () => {
         setLoading(false);
       });
   }, [query]);
-  console.log(news);
+  
+const pageHandler = (pageNumber) => {
+  setPerpage(news.slice((pageNumber*5)-5,pageNumber*5));
+}
   return (
       <div className="App">
         <h1 className="heading">Hacker News</h1>
-       
         <Form  setQuery={setQuery} />
         {loading ? ( //steffani
           <ClipLoader color="#ffffff" loading={loading} css={override} size={150} /> 
         ) : (
-          <ul>
-            {news.map((story) => (
+          <div>
+          <ul className="list">
+            {perpage.map((story) => (
+              <div>
               <li className = "list-items" key={story.objectID}>
                 {story.title}
-                <br />
-                <span>By: {story.author}</span>
+                <br /><br/>
+                <span>Author: {story.author}</span>
                 <br />
                 <span>Points: {story.points}</span>
               </li>
+              </div>
             ))}
           </ul>
+          <Pagination news = {news} pageHandler = {pageHandler} />
+          </div>
+         
           )}
-          {news.length === 0 &&
-        <h2>
-         Invalid search.
-        </h2>
-      }
-          {error !== "" && <h2>Please try again!</h2>}
+
+          {resultvalue === 0 &&
+          <h2>No search results found</h2>}
+         
+          { error !== "" &&
+          <h2> Posts are not loading, please try again! </h2>
+          }
+              
       </div>
+      
     );
 
 };
