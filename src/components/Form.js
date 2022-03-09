@@ -15,7 +15,7 @@ const Form = ({ setQuery }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} method="POST">
+    <form className = "form" onSubmit={handleSubmit} method="POST">
       <label>
         <input
         className="search-bar"
@@ -26,7 +26,6 @@ const Form = ({ setQuery }) => {
           key={story.objectID}
         />
       </label>
-
       <button className="submit" type="submit">Search</button>
     </form>
   );

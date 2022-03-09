@@ -14,28 +14,71 @@ code {
 .App {
   font-family: sans-serif;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .App ul li {
-  margin: 10px;
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+.list {
+  display: flex;
+  justify-content: center;
 }
 .App ul {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .heading {
+  display: flex;
   color: darkorange;
   font-family: Roboto;
+  justify-content: center;
+  width: 100%;
+}
+.form {
+  display: flex;
+  justify-content: center;
 }
 .search-bar {
   margin: 5px;
-  width: 20%;
-  padding: 8px;
+  font-size: 16px;
+  width: 250px;
+  padding: 10px;
   border: 2px solid grey;
 }
 .submit {
   margin: 5px;
-  width: 5%;
-  padding: 8px;
+  width: 120px;
+  font-size: 16px;
+  padding: 10px;
   background-color: aliceblue;
   border: 2px solid grey;
+}
+.list-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px 10px;
+  background: #fff;
+}
+.pagebutton {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 5px;
+  border: 2px solid darkorange;
+}
+.pagenum {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 20px 30px;
 }
